@@ -44,4 +44,14 @@ export class UserService {
       relations: ['addresses.city.state'],
     });
   }
+
+  async getUserByEmail(email: string): Promise<UserEntity> {
+    const user = this.userRepository.findOneBy({ email });
+
+    if (!user) {
+      throw new NotFoundException('User email not found');
+    }
+
+    return user;
+  }
 }

@@ -8,6 +8,7 @@ import { StateModule } from './modules/state/state.module';
 import { UserModule } from './modules/user/user.module';
 import { CacheModule } from './modules/cache/cache.module';
 import { APP_PIPE } from '@nestjs/core';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { APP_PIPE } from '@nestjs/core';
     CityModule,
     StateModule,
     CacheModule,
+    AuthModule,
   ],
   providers: [
     {
