@@ -12,7 +12,9 @@ export class AddressController {
   }
 
   @Post()
-  create(@Body() address: CreateAddressDto) {
-    return this.addressService.create(address);
+  create(
+    @Body() { userId, ...address }: CreateAddressDto & { userId: number },
+  ) {
+    return this.addressService.create(address, userId);
   }
 }
