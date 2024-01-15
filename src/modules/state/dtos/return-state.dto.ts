@@ -1,11 +1,9 @@
 import { StateEntity } from '../entities/state.entity';
 
 export class ReturnStateDto {
-  id: number;
   name: string;
 
-  constructor({ id, name }: StateEntity) {
-    this.id = id;
+  constructor({ name }: StateEntity) {
     this.name = name;
   }
 
