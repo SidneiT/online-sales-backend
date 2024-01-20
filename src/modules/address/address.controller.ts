@@ -3,6 +3,7 @@ import { CreateAddressDto } from './dtos/create-address.dto';
 import { AddressService } from './address.service';
 import { Roles } from 'src/decorators/roles.decorator';
 import { UserType } from '../user/enums/user-type.enum';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 @Roles(UserType.User)
 @Controller('address')
@@ -16,7 +17,8 @@ export class AddressController {
 
   @Post()
   create(
-    @Body() { userId, ...address }: CreateAddressDto & { userId: number },
+    @UserId() userId: number,
+    @Body() { ...address }: CreateAddressDto & { userId: number },
   ) {
     return this.addressService.create(address, userId);
   }

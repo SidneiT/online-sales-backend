@@ -26,6 +26,6 @@ export class AddressService {
     await this.userService.getUserById(userId);
     await this.cityService.getCityById(address.cityId);
 
-    return this.addressRepository.save({ userId, address });
+    return this.addressRepository.save({ userId, ...address });
   }
 }
