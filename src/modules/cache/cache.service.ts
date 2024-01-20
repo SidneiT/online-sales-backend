@@ -6,8 +6,8 @@ import { Cache } from 'cache-manager';
 export class CacheService {
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  async getCache<S>(key: string, callback: () => Promise<S>): Promise<S> {
-    const cachedValue: S = await this.cacheManager.get(key);
+  async getCache<T>(key: string, callback: () => Promise<T>): Promise<T> {
+    const cachedValue: T = await this.cacheManager.get(key);
 
     if (cachedValue) {
       return cachedValue;
