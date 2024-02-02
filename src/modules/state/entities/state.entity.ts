@@ -1,4 +1,4 @@
-import { CityEntity } from 'src/modules/city/entities/city.entity';
+import { CityEntity } from '../../../modules/city/entities/city.entity';
 import {
   Column,
   CreateDateColumn,

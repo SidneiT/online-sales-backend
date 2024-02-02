@@ -1,4 +1,4 @@
-import { TokenPayloadDto } from 'src/modules/auth/dtos/token-payload.dto';
+import { TokenPayloadDto } from '../modules/auth/dtos/token-payload.dto';
 
 export const getPayloadFromJwt = (
   authorization: string,

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { hash } from 'bcrypt';
 import { UserEntity } from './entities/user.entity';
@@ -17,6 +21,14 @@ export class UserService {
   }
 
   async createUser(user: CreateUserDto): Promise<UserEntity> {
+    const checkEmail = await this.getUserByEmail(user.email).catch(
+      () => undefined,
+    );
+
+    if (checkEmail) {
+      throw new ConflictException('Email is already registered in the system');
+    }
+
     const hashedPassword = await hash(user.password, 10);
 
     return this.userRepository.save({
@@ -46,7 +58,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<UserEntity> {
-    const user = this.userRepository.findOneBy({ email });
+    const user = await this.userRepository.findOneBy({ email });
 
     if (!user) {
       throw new NotFoundException('User email not found');

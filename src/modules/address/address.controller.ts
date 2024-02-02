@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateAddressDto } from './dtos/create-address.dto';
 import { AddressService } from './address.service';
-import { Roles } from 'src/decorators/roles.decorator';
+import { Roles } from '../../decorators/roles.decorator';
 import { UserType } from '../user/enums/user-type.enum';
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../../decorators/user-id.decorator';
 
 @Roles(UserType.User)
 @Controller('address')
