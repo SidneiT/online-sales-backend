@@ -24,7 +24,7 @@ describe('StateService', () => {
           provide: getRepositoryToken(AddressEntity),
           useValue: {
             save: jest.fn().mockResolvedValue(addressEntityMock),
-            findBy: jest.fn().mockResolvedValue([addressEntityMock]),
+            find: jest.fn().mockResolvedValue([addressEntityMock]),
           },
         },
         {
@@ -62,9 +62,12 @@ describe('StateService', () => {
     });
 
     it('should return error if repo throws', () => {
-      jest
-        .spyOn(addressRepository, 'findBy')
-        .mockRejectedValueOnce(new Error());
+      jest.spyOn(addressRepository, 'find').mockRejectedValueOnce(new Error());
+      expect(service.getByUser(addressEntityMock.id)).rejects.toThrow();
+    });
+
+    it('should throw not found if user does not have addresses', () => {
+      jest.spyOn(addressRepository, 'find').mockResolvedValueOnce(undefined);
       expect(service.getByUser(addressEntityMock.id)).rejects.toThrow();
     });
   });

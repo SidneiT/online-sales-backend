@@ -7,6 +7,7 @@ import { UserService } from '../user/user.service';
 import { LoginDto } from './dtos/login.dto';
 import { ReturnLoginDto } from './dtos/return-login.dto';
 import { TokenPayloadDto } from './dtos/token-payload.dto';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
   ) {}
 
   async signIn({ email, password }: LoginDto): Promise<ReturnLoginDto> {
-    const user = await this.userService
+    const user: UserEntity | undefined = await this.userService
       .getUserByEmail(email)
       .catch(() => undefined);
 
@@ -26,7 +27,7 @@ export class AuthService {
       throw new UnauthorizedException('User email or password are invalid');
     }
 
-    const accessToken = await this.jwtService.sign({
+    const accessToken = this.jwtService.sign({
       ...new TokenPayloadDto(user),
     });
 
