@@ -11,6 +11,8 @@ import { CityModule } from './modules/city/city.module';
 import { StateModule } from './modules/state/state.module';
 import { UserModule } from './modules/user/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CategoryModule } from './modules/category/category.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { JwtModule } from '@nestjs/jwt';
     CacheModule,
     AuthModule,
     JwtModule,
+    CategoryModule,
+    ProductModule,
   ],
   providers: [
     {

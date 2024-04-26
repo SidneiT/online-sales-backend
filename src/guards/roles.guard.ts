@@ -22,7 +22,10 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    const { authorization } = context.switchToHttp().getRequest().headers;
+    const authorization = context
+      .switchToHttp()
+      .getRequest()
+      .headers?.authorization?.replace('Bearer ', '');
 
     const tokenPayload: TokenPayloadDto | undefined = await this.jwtService
       .verifyAsync(authorization, {
